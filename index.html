@@ -31,571 +31,303 @@
         }
 
         body {
-            font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+            font-family: 'Noto Sans TC', sans-serif;
             background: var(--gradient);
             min-height: 100vh;
             padding: 20px;
             color: var(--dark);
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
-            pointer-events: none;
-            z-index: 0;
         }
 
         .container {
-            max-width: 960px;
+            max-width: 900px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 24px;
-            box-shadow: 
-                0 25px 50px -12px rgba(0, 0, 0, 0.25),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             overflow: hidden;
-            position: relative;
-            z-index: 1;
-            backdrop-filter: blur(20px);
         }
 
         header {
             background: var(--gradient);
             color: var(--white);
-            padding: 50px 40px;
+            padding: 40px;
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            animation: pulse 15s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-10%, -10%) scale(1.1); }
         }
 
         header h1 {
-            font-size: 2.8em;
-            margin-bottom: 12px;
-            font-weight: 700;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 1;
+            font-size: 2.2em;
+            margin-bottom: 10px;
         }
 
         .subtitle {
-            font-size: 1.15em;
-            opacity: 0.95;
-            font-weight: 400;
-            position: relative;
-            z-index: 1;
+            opacity: 0.9;
+            font-size: 1.1em;
         }
 
         .api-key-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.15);
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.2);
+            border: none;
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 10px 18px;
-            border-radius: 50px;
+            padding: 8px 16px;
+            border-radius: 20px;
             cursor: pointer;
             font-size: 0.9em;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 2;
         }
 
         .api-key-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255,255,255,0.3);
         }
 
         main {
-            padding: 50px 40px;
+            padding: 30px;
         }
 
-        .search-section {
-            margin-bottom: 40px;
+        .input-section {
+            margin-bottom: 25px;
         }
 
-        .input-group {
-            margin-bottom: 24px;
-        }
-
-        /* 圖片上傳區域 */
-        .image-upload-section {
-            margin-bottom: 24px;
-            padding: 20px;
-            background: var(--gradient-soft);
-            border-radius: 16px;
-            border: 2px dashed rgba(99, 102, 241, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .image-upload-section.drag-over {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.1);
-        }
-
-        .image-upload-label {
+        .input-section label {
             display: block;
-            margin-bottom: 12px;
             font-weight: 600;
-            color: var(--dark);
+            margin-bottom: 10px;
             font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .image-upload-label::before {
-            content: '📷';
-            font-size: 1.2em;
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .image-upload-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
         }
 
         .image-upload-area {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            background: var(--white);
+            border: 2px dashed #cbd5e1;
             border-radius: 12px;
+            padding: 30px;
+            text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
         .image-upload-area:hover {
+            border-color: var(--primary);
             background: rgba(99, 102, 241, 0.05);
         }
 
         .image-upload-input {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .upload-icon {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-
-        .upload-text {
-            color: var(--gray);
-            font-size: 0.95em;
-            text-align: center;
+            display: none;
         }
 
         .image-preview-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 12px;
-            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
         }
 
         .image-preview-item {
             position: relative;
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 80px;
+            height: 80px;
         }
 
         .image-preview-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 8px;
         }
 
         .image-preview-item .remove-btn {
             position: absolute;
-            top: 5px;
-            right: 5px;
-            width: 28px;
-            height: 28px;
-            background: rgba(239, 68, 68, 0.9);
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            background: var(--danger);
             color: white;
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            transition: all 0.2s ease;
-        }
-
-        .image-preview-item .remove-btn:hover {
-            background: var(--danger);
-            transform: scale(1.1);
-        }
-
-        .input-group label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 1.1em;
-        }
-
-        .input-group label::before {
-            content: '💊';
-            font-size: 1.2em;
-        }
-
-        #foodInput {
-            width: 100%;
-            padding: 18px 22px;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            font-size: 1.05em;
-            font-family: inherit;
-            resize: vertical;
-            transition: all 0.3s ease;
-            background: var(--white);
-            min-height: 100px;
-        }
-
-        #foodInput:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-        }
-
-        #foodInput::placeholder {
-            color: #94a3b8;
+            font-size: 14px;
         }
 
         .search-btn {
             width: 100%;
-            padding: 18px 30px;
+            padding: 16px;
             background: var(--gradient);
             color: white;
             border: none;
-            border-radius: 16px;
-            font-size: 1.2em;
+            border-radius: 12px;
+            font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .search-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .search-btn:hover::before {
-            left: 100%;
-        }
-
-        .search-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
-        }
-
-        .search-btn:active {
-            transform: translateY(-1px);
+        .search-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
         }
 
         .search-btn:disabled {
             opacity: 0.7;
             cursor: not-allowed;
-            transform: none;
         }
 
         .result-section {
-            margin-top: 40px;
-            animation: slideUp 0.5s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .result-header {
-            margin-bottom: 24px;
+            margin-top: 25px;
+            padding: 25px;
+            background: var(--gradient-soft);
+            border-radius: 16px;
         }
 
         .result-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 24px;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
         .result-header h2 {
-            color: var(--dark);
-            font-size: 1.6em;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .result-header h2::before {
-            content: '✨';
-        }
-
-        /* 交互作用分析區域 */
-        .interaction-content {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            padding: 35px;
-            border-radius: 20px;
-            margin-top: 24px;
-            border-left: 5px solid var(--warning);
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.2);
-            line-height: 1.9;
-            font-size: 1.05em;
-            color: var(--dark);
-        }
-
-        /* 交互作用分析區域使用與 result-content 相同的樣式 */
-        .interaction-content h1 {
-            color: var(--white);
-            font-size: 1.6em;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding: 18px 25px;
-            background: var(--gradient);
-            border-radius: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-        }
-
-        .interaction-content h1:first-child {
-            margin-top: 0;
-        }
-
-        .interaction-content h2 {
-            color: var(--dark);
             font-size: 1.4em;
-            margin-top: 32px;
-            margin-bottom: 18px;
-            padding: 14px 20px;
-            background: linear-gradient(135deg, #f0f9ff 0%, #ede9fe 100%);
-            border-left: 5px solid var(--primary);
-            border-radius: 0 10px 10px 0;
-            font-weight: 600;
+            color: var(--dark);
         }
 
-        .interaction-content h2:first-child {
+        .food-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .food-tag {
+            background: var(--gradient);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .item-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .item-tab {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .item-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .item-tab.active {
+            background: var(--gradient);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .result-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            line-height: 1.8;
+        }
+
+        .result-content h2 {
+            color: var(--primary-dark);
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #ede9fe 100%);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .result-content h2:first-child {
             margin-top: 0;
         }
 
-        .interaction-content h3 {
+        .result-content h3 {
             color: var(--secondary);
-            font-size: 1.2em;
-            margin-top: 26px;
-            margin-bottom: 14px;
-            padding: 10px 0;
-            font-weight: 600;
+            font-size: 1.15em;
+            margin: 20px 0 12px;
+            padding-bottom: 8px;
             border-bottom: 2px dashed rgba(236, 72, 153, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .interaction-content h3::before {
-            content: '▸';
-            color: var(--secondary);
-            font-size: 1.1em;
-        }
-
-        .interaction-content h4 {
+        .result-content h4 {
             color: var(--accent);
             font-size: 1.05em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            padding-left: 15px;
-            font-weight: 600;
-            border-left: 3px solid var(--accent);
-            background: rgba(20, 184, 166, 0.05);
-            padding: 8px 15px;
-            border-radius: 0 6px 6px 0;
+            margin: 15px 0 10px;
         }
 
-        .interaction-content p {
-            margin-bottom: 16px;
-            line-height: 1.9;
-            color: #334155;
-        }
-
-        .interaction-content ul,
-        .interaction-content ol {
-            margin: 16px 0 20px 0;
-            padding-left: 0;
+        .result-content ul {
             list-style: none;
+            padding: 0;
+            margin: 12px 0;
         }
 
-        .interaction-content li {
-            margin-bottom: 12px;
-            line-height: 1.8;
-            padding: 12px 16px 12px 45px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 12px;
+        .result-content li {
+            padding: 10px 15px 10px 35px;
+            margin-bottom: 8px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 8px;
             position: relative;
-            transition: all 0.2s ease;
             border-left: 3px solid var(--primary);
         }
 
-        .interaction-content li:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: translateX(5px);
-        }
-
-        .interaction-content li::before {
-            content: '●';
+        .result-content li::before {
+            content: '•';
             position: absolute;
-            left: 16px;
+            left: 15px;
             color: var(--primary);
-            font-size: 0.6em;
-            top: 50%;
-            transform: translateY(-50%);
         }
 
-        .interaction-content strong {
+        .result-content strong {
             color: var(--primary);
-            font-weight: 600;
-            background: linear-gradient(120deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
-            padding: 2px 6px;
-            border-radius: 4px;
         }
 
-        .interaction-content em {
-            color: var(--secondary);
-            font-style: normal;
-            font-weight: 500;
-        }
-
-        .interaction-content .category-title {
-            color: var(--dark);
-            font-size: 1.15em;
-            font-weight: 700;
-            margin-top: 24px;
+        .result-content p {
             margin-bottom: 12px;
-            padding: 12px 18px;
+        }
+
+        .interaction-section {
+            margin-top: 25px;
+            padding: 25px;
             background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-left: 4px solid var(--warning);
-            border-radius: 0 10px 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .interaction-content .item-title {
-            color: var(--primary-dark);
-            font-weight: 600;
-            margin-right: 8px;
-            padding: 2px 10px;
-            background: rgba(99, 102, 241, 0.12);
-            border-radius: 6px;
-            display: inline-block;
-        }
-
-        .interaction-content .item-content {
-            color: #475569;
-        }
-
-        .interaction-content .info-table {
-            background: var(--white);
-            border-radius: 12px;
-            margin: 20px 0;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(99, 102, 241, 0.15);
-        }
-
-        .interaction-content .table-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: var(--white);
-            padding: 14px 20px;
-            font-weight: 600;
-            font-size: 1.05em;
-            letter-spacing: 0.5px;
-        }
-
-        .interaction-content .table-row {
-            display: flex;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-            transition: background 0.2s ease;
-        }
-
-        .interaction-content .table-row:last-child {
-            border-bottom: none;
-        }
-
-        .interaction-content .table-row:hover {
-            background: rgba(99, 102, 241, 0.03);
-        }
-
-        .interaction-content .row-label {
-            flex: 0 0 140px;
-            padding: 14px 18px;
-            font-weight: 600;
-            color: var(--primary-dark);
-            background: rgba(99, 102, 241, 0.05);
-            border-right: 2px solid rgba(99, 102, 241, 0.1);
-            display: flex;
-            align-items: center;
-        }
-
-        .interaction-content .row-value {
-            flex: 1;
-            padding: 14px 18px;
-            color: #475569;
-            line-height: 1.7;
-        }
-
-        .result-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            border-radius: 16px;
+            border-left: 5px solid var(--warning);
         }
 
         .save-warning-btn {
@@ -603,696 +335,95 @@
             background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.95em;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: inherit;
         }
 
         .save-warning-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
-        }
-
-        .save-warning-btn.saved {
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-        }
-
-        .save-warning-btn.saved:hover {
-            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
-        }
-
-        /* 項目切換按鈕 */
-        .item-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(99, 102, 241, 0.1);
-        }
-
-        .item-tab {
-            padding: 10px 20px;
-            background: var(--light);
-            border: 2px solid transparent;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 500;
-            color: var(--gray);
-            transition: all 0.3s ease;
-            font-size: 0.95em;
-            position: relative;
-        }
-
-        .item-tab:hover {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .item-tab.active {
-            background: var(--gradient);
-            color: var(--white);
-            border-color: var(--primary);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-        }
-
-        .item-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -17px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 8px solid var(--primary);
-        }
-
-        /* 項目內容容器 */
-        .item-content-wrapper {
-            display: none;
-        }
-
-        .item-content-wrapper.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .searched-foods {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .food-tag {
-            background: var(--gradient);
-            color: white;
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-size: 0.95em;
-            font-weight: 500;
-            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
-            transition: transform 0.2s ease;
-        }
-
-        .food-tag:hover {
-            transform: scale(1.05);
-        }
-
-        .result-content {
-            background: var(--gradient-soft);
-            padding: 35px;
-            border-radius: 20px;
-            line-height: 1.9;
-            font-size: 1.05em;
-            color: var(--dark);
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        /* 主標題 H1 - 最大、最醒目 */
-        .result-content h1 {
-            color: var(--white);
-            font-size: 1.6em;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding: 18px 25px;
-            background: var(--gradient);
-            border-radius: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-        }
-
-        .result-content h1:first-child {
-            margin-top: 0;
-        }
-
-        /* 大標題 H2 - 區塊標題 */
-        .result-content h2 {
-            color: var(--dark);
-            font-size: 1.4em;
-            margin-top: 32px;
-            margin-bottom: 18px;
-            padding: 14px 20px;
-            background: linear-gradient(135deg, #f0f9ff 0%, #ede9fe 100%);
-            border-left: 5px solid var(--primary);
-            border-radius: 0 10px 10px 0;
-            font-weight: 600;
-        }
-
-        .result-content h2:first-child {
-            margin-top: 0;
-        }
-
-        /* 小標題 H3 - 段落標題 */
-        .result-content h3 {
-            color: var(--secondary);
-            font-size: 1.2em;
-            margin-top: 26px;
-            margin-bottom: 14px;
-            padding: 10px 0;
-            font-weight: 600;
-            border-bottom: 2px dashed rgba(236, 72, 153, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .result-content h3::before {
-            content: '▸';
-            color: var(--secondary);
-            font-size: 1.1em;
-        }
-
-        /* 次標題 H4 - 細項標題 */
-        .result-content h4 {
-            color: var(--accent);
-            font-size: 1.05em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            padding-left: 15px;
-            font-weight: 600;
-            border-left: 3px solid var(--accent);
-            background: rgba(20, 184, 166, 0.05);
-            padding: 8px 15px;
-            border-radius: 0 6px 6px 0;
-        }
-
-        .result-content p {
-            margin-bottom: 16px;
-            line-height: 1.9;
-            color: #334155;
-        }
-
-        .result-content ul,
-        .result-content ol {
-            margin: 16px 0 20px 0;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .result-content li {
-            margin-bottom: 12px;
-            line-height: 1.8;
-            padding: 12px 16px 12px 45px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 12px;
-            position: relative;
-            transition: all 0.2s ease;
-            border-left: 3px solid var(--primary);
-        }
-
-        .result-content li:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: translateX(5px);
-        }
-
-        .result-content li::before {
-            content: '●';
-            position: absolute;
-            left: 16px;
-            color: var(--primary);
-            font-size: 0.6em;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .result-content strong {
-            color: var(--primary);
-            font-weight: 600;
-            background: linear-gradient(120deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .result-content em {
-            color: var(--secondary);
-            font-style: normal;
-            font-weight: 500;
-        }
-
-        .result-content blockquote {
-            border-left: 4px solid var(--accent);
-            padding: 20px 25px;
-            margin: 24px 0;
-            background: rgba(20, 184, 166, 0.08);
-            border-radius: 0 12px 12px 0;
-            font-style: italic;
-            color: #475569;
-        }
-
-        .result-content hr {
-            border: none;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            margin: 30px 0;
-            border-radius: 2px;
-            opacity: 0.3;
-        }
-
-        /* 分類標題（如「男性：」、「女性：」） */
-        .result-content .category-title {
-            color: var(--dark);
-            font-size: 1.15em;
-            font-weight: 700;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            padding: 12px 18px;
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-left: 4px solid var(--warning);
-            border-radius: 0 10px 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .result-content .category-title::before {
-            content: '👤';
-            font-size: 1.1em;
-        }
-
-        /* 項目標題（如「禿髮：」） */
-        .result-content .item-title {
-            color: var(--primary-dark);
-            font-weight: 600;
-            margin-right: 8px;
-            padding: 2px 10px;
-            background: rgba(99, 102, 241, 0.12);
-            border-radius: 6px;
-            display: inline-block;
-        }
-
-        /* 項目內容 */
-        .result-content .item-content {
-            color: #475569;
-        }
-
-        /* 列表項目中有標題時的特殊樣式 */
-        .result-content li .item-title {
-            color: var(--secondary);
-            background: rgba(236, 72, 153, 0.1);
-            font-size: 0.95em;
-        }
-
-        /* 資訊表格樣式 */
-        .result-content .info-table {
-            background: var(--white);
-            border-radius: 12px;
-            margin: 20px 0;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(99, 102, 241, 0.15);
-        }
-
-        .result-content .table-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: var(--white);
-            padding: 14px 20px;
-            font-weight: 600;
-            font-size: 1.05em;
-            letter-spacing: 0.5px;
-        }
-
-        .result-content .table-row {
-            display: flex;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-            transition: background 0.2s ease;
-        }
-
-        .result-content .table-row:last-child {
-            border-bottom: none;
-        }
-
-        .result-content .table-row:hover {
-            background: rgba(99, 102, 241, 0.03);
-        }
-
-        .result-content .row-label {
-            flex: 0 0 140px;
-            padding: 14px 18px;
-            font-weight: 600;
-            color: var(--primary-dark);
-            background: rgba(99, 102, 241, 0.05);
-            border-right: 2px solid rgba(99, 102, 241, 0.1);
-            display: flex;
-            align-items: center;
-        }
-
-        .result-content .row-value {
-            flex: 1;
-            padding: 14px 18px;
-            color: #475569;
-            line-height: 1.7;
-        }
-
-        /* 響應式表格 */
-        @media (max-width: 768px) {
-            .result-content .table-row {
-                flex-direction: column;
-            }
-
-            .result-content .row-label {
-                flex: none;
-                border-right: none;
-                border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-                padding: 10px 15px;
-                font-size: 0.9em;
-            }
-
-            .result-content .row-value {
-                padding: 12px 15px;
-            }
         }
 
         .error-message {
-            background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%);
+            background: #fef2f2;
             color: var(--danger);
-            padding: 20px 25px;
-            border-radius: 16px;
+            padding: 15px 20px;
+            border-radius: 12px;
             border-left: 4px solid var(--danger);
-            margin-top: 24px;
-            animation: shake 0.5s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            margin-top: 20px;
         }
 
-        .error-message::before {
-            content: '⚠️';
-            font-size: 1.3em;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
-        }
-
-        footer {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            padding: 25px;
-            text-align: center;
-            color: var(--gray);
-            font-size: 0.95em;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        footer p {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        footer p::before {
-            content: '⚡';
-        }
-
-        /* 模態視窗 */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            animation: fadeIn 0.3s ease;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal.show {
             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .modal-content {
-            background: var(--white);
-            margin: auto;
-            padding: 35px;
-            border-radius: 24px;
-            max-width: 480px;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 450px;
             width: 90%;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-            animation: modalSlide 0.4s ease;
         }
 
-        @keyframes modalSlide {
-            from {
-                transform: translateY(-30px) scale(0.95);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
+        .modal-content h3 {
+            margin-bottom: 20px;
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .modal-header h2 {
-            color: var(--dark);
-            font-size: 1.4em;
-            margin: 0;
-        }
-
-        .close {
-            color: #94a3b8;
-            font-size: 28px;
-            font-weight: 400;
-            cursor: pointer;
-            line-height: 1;
-            transition: all 0.3s ease;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .close:hover {
-            color: var(--dark);
-            background: var(--light);
-        }
-
-        .modal-body label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 0.95em;
-        }
-
-        .modal-body input {
+        .modal-content input {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px;
             border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 0.95em;
-            font-family: 'Courier New', monospace;
-            margin-bottom: 16px;
-            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
-        .modal-body input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-        }
-
-        .modal-body .hint {
-            font-size: 0.9em;
-            color: var(--gray);
-            margin-bottom: 24px;
-            line-height: 1.7;
-            padding: 16px;
-            background: var(--light);
-            border-radius: 12px;
-        }
-
-        .modal-body .hint a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .modal-body .hint a:hover {
-            text-decoration: underline;
-        }
-
-        .modal-footer {
+        .modal-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: flex-end;
         }
 
-        .btn {
-            padding: 12px 24px;
+        .modal-buttons button {
+            padding: 10px 20px;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-family: inherit;
+            font-weight: 500;
         }
 
         .btn-primary {
-            background: var(--gradient);
+            background: var(--primary);
             color: white;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
-        }
-
         .btn-secondary {
-            background: var(--light);
+            background: #e2e8f0;
             color: var(--dark);
         }
 
-        .btn-secondary:hover {
-            background: #e2e8f0;
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.9em;
         }
 
-        /* 載入動畫 */
-        .btn-loading {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-loading::after {
-            content: '';
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* 響應式設計 */
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            header {
-                padding: 40px 25px;
-            }
-
-            header h1 {
-                font-size: 2em;
-            }
-
-            .subtitle {
-                font-size: 1em;
-            }
-
-            main {
-                padding: 30px 20px;
-            }
-
-            .result-content {
-                padding: 25px 20px;
-                font-size: 1em;
-            }
-
-            .result-content h1 {
-                font-size: 1.3em;
-                padding: 14px 18px;
-            }
-
-            .result-content h2 {
-                font-size: 1.2em;
-                padding: 12px 16px;
-            }
-
-            .result-content h3 {
-                font-size: 1.1em;
-            }
-
-            .result-content h4 {
-                font-size: 1em;
-            }
-
-            .result-content li {
-                padding: 10px 14px 10px 38px;
-            }
-
-            .api-key-btn {
-                top: 12px;
-                right: 12px;
-                padding: 8px 14px;
-                font-size: 0.85em;
-            }
-
-            .modal-content {
-                padding: 25px;
-                width: 95%;
-                margin: 20px;
-            }
-
-            .food-tag {
-                padding: 6px 14px;
-                font-size: 0.9em;
-            }
-
-            .item-tabs {
-                gap: 8px;
-            }
-
-            .item-tab {
-                padding: 8px 16px;
-                font-size: 0.9em;
-            }
-        }
-
-        /* 滾動條美化 */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--light);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(var(--primary), var(--secondary));
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
+            header h1 { font-size: 1.8em; }
+            main { padding: 20px; }
         }
     </style>
 </head>
@@ -1305,549 +436,152 @@
         </header>
 
         <main>
-            <div class="search-section">
-                <div class="input-group">
-                    <label for="foodInput">輸入名稱（可輸入多種，用逗號或換行分隔）</label>
-                    <textarea 
-                        id="foodInput" 
-                        placeholder="例如：蘋果、維他命C、魚油&#10;或：阿斯匹靈、葡萄柚、薑黃&#10;或：益生菌、牛奶、抗生素&#10;&#10;支援食物、藥物、保健食品混合分析！"
-                        rows="4"
-                    ></textarea>
-                </div>
-
-                <div class="image-upload-section" id="imageUploadSection">
-                    <label class="image-upload-label">上傳圖片辨識（可上傳多張）</label>
-                    <div class="image-upload-area" id="imageUploadArea">
-                        <div class="upload-icon">📸</div>
-                        <div class="upload-text">點擊或拖放圖片到此處<br><small>支援 JPG、PNG、WEBP 格式</small></div>
-                        <input 
-                            type="file" 
-                            id="imageInput" 
-                            class="image-upload-input" 
-                            accept="image/*" 
-                            multiple
-                        >
-                    </div>
-                    <div class="image-preview-container" id="imagePreviewContainer"></div>
-                </div>
-
-                <button id="searchBtn" class="search-btn">
-                    <span class="btn-text">🔍 搜尋功效</span>
-                    <span class="btn-loading" style="display: none;">搜尋中</span>
-                </button>
+            <div class="input-section">
+                <label>🏷️ 輸入名稱（可輸入多種，用逗號或換行分隔）</label>
+                <textarea id="foodInput" placeholder="例如：香蕉、牛奶、維他命C"></textarea>
             </div>
+
+            <div class="image-upload-section">
+                <label>📷 上傳圖片辨識（可上傳多張）</label>
+                <div class="image-upload-area" id="imageUploadArea">
+                    <div>📸</div>
+                    <div>點擊或拖放圖片到此處</div>
+                    <div style="font-size: 0.85em; color: #94a3b8;">支援 JPG、PNG、WEBP 格式</div>
+                    <input type="file" id="imageInput" class="image-upload-input" accept="image/*" multiple>
+                </div>
+                <div class="image-preview-container" id="imagePreviewContainer"></div>
+            </div>
+
+            <button id="searchBtn" class="search-btn">
+                <span class="btn-text">🔍 搜尋功效</span>
+                <span class="btn-loading" style="display: none;">搜尋中...</span>
+            </button>
 
             <div id="resultSection" class="result-section" style="display: none;">
                 <div class="result-header">
                     <div>
-                        <h2>搜尋結果</h2>
-                        <div id="searchedFoods" class="searched-foods"></div>
+                        <h2>✨ 搜尋結果</h2>
+                        <div id="foodTags" class="food-tags"></div>
                     </div>
-                    <div class="result-actions" id="resultActions" style="display: none;">
-                        <button id="saveWarningBtn" class="save-warning-btn">
-                            <span>⚠️</span>
-                            <span>儲存禁忌提醒</span>
-                        </button>
-                    </div>
+                    <button id="saveWarningBtn" class="save-warning-btn" style="display: none;">
+                        ⚠️ 儲存禁忌提醒
+                    </button>
                 </div>
                 <div id="itemTabs" class="item-tabs" style="display: none;"></div>
                 <div id="resultContent" class="result-content"></div>
-                <div id="interactionContent" class="interaction-content" style="display: none;"></div>
+                <div id="interactionSection" class="interaction-section" style="display: none;"></div>
             </div>
 
             <div id="errorMessage" class="error-message" style="display: none;"></div>
         </main>
 
         <footer>
-            <p>Powered by Google Gemini 2.5 Flash</p>
+            ⚡ Powered by Google Gemini 2.0 Flash
         </footer>
     </div>
 
-    <!-- API Key 模態視窗 -->
+    <!-- API Key Modal -->
     <div id="apiKeyModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>🔑 設定 API Key</h2>
-                <span class="close" id="closeModal">&times;</span>
-            </div>
-            <div class="modal-body">
-                <label for="apiKeyInput">Gemini API Key</label>
-                <input 
-                    type="password" 
-                    id="apiKeyInput" 
-                    placeholder="請輸入您的 Gemini API Key"
-                >
-                <div class="hint">
-                    💡 <strong>提示：</strong>API Key 會安全保存在瀏覽器本地，不會上傳到任何伺服器。<br><br>
-                    <a href="https://makersuite.google.com/app/apikey" target="_blank">👉 點此申請免費 API Key</a>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancelBtn">取消</button>
-                <button class="btn btn-primary" id="saveApiKeyBtn">儲存</button>
+            <h3>🔑 設定 Gemini API Key</h3>
+            <input type="password" id="apiKeyInput" placeholder="請輸入您的 API Key">
+            <div class="modal-buttons">
+                <button class="btn-secondary" id="cancelBtn">取消</button>
+                <button class="btn-primary" id="saveApiKeyBtn">儲存</button>
             </div>
         </div>
     </div>
 
     <script>
+        // ===== 全域變數 =====
+        let uploadedImages = [];
+        let db = null;
+
+        // ===== DOM 元素 =====
         const foodInput = document.getElementById('foodInput');
-        const apiKeyInput = document.getElementById('apiKeyInput');
         const searchBtn = document.getElementById('searchBtn');
         const resultSection = document.getElementById('resultSection');
         const resultContent = document.getElementById('resultContent');
-        const searchedFoods = document.getElementById('searchedFoods');
-        const errorMessage = document.getElementById('errorMessage');
+        const foodTags = document.getElementById('foodTags');
         const itemTabs = document.getElementById('itemTabs');
-        const interactionContent = document.getElementById('interactionContent');
+        const interactionSection = document.getElementById('interactionSection');
+        const errorMessage = document.getElementById('errorMessage');
+        const saveWarningBtn = document.getElementById('saveWarningBtn');
         const apiKeyModal = document.getElementById('apiKeyModal');
+        const apiKeyInput = document.getElementById('apiKeyInput');
         const imageInput = document.getElementById('imageInput');
         const imageUploadArea = document.getElementById('imageUploadArea');
         const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-        const imageUploadSection = document.getElementById('imageUploadSection');
-        const resultActions = document.getElementById('resultActions');
-        const saveWarningBtn = document.getElementById('saveWarningBtn');
-        
-        let uploadedImages = [];
-        let db = null;
-        
-        // 初始化 IndexedDB
+
+        // ===== IndexedDB 初始化 =====
         function initDB() {
             return new Promise((resolve, reject) => {
                 const request = indexedDB.open('FoodEfficacyDB', 1);
-                
                 request.onerror = () => reject(request.error);
                 request.onsuccess = () => {
                     db = request.result;
                     resolve(db);
                 };
-                
-                request.onupgradeneeded = (event) => {
-                    const database = event.target.result;
+                request.onupgradeneeded = (e) => {
+                    const database = e.target.result;
                     if (!database.objectStoreNames.contains('warnings')) {
-                        const objectStore = database.createObjectStore('warnings', { keyPath: 'id', autoIncrement: true });
-                        objectStore.createIndex('items', 'items', { unique: false });
-                        objectStore.createIndex('timestamp', 'timestamp', { unique: false });
+                        database.createObjectStore('warnings', { keyPath: 'id', autoIncrement: true });
                     }
                 };
             });
         }
-        
-        // 檢測結果中是否有禁忌內容
-        function hasWarningContent(result) {
-            const warningKeywords = [
-                '不能同時', '不能一起', '不可同時', '不可一起',
-                '相剋', '禁忌', '禁止', '不適合',
-                '避免', '不宜', '警告', '危險',
-                '交互作用', '副作用', '注意事項',
-                '🚨', '⚠️', '❌'
-            ];
-            
-            const lowerResult = result.toLowerCase();
-            return warningKeywords.some(keyword => lowerResult.includes(keyword.toLowerCase()));
-        }
-        
-        // 提取禁忌內容，格式：XX+XX 不能同時食用 會產生XXXX
-        function extractWarningContent(result, foods) {
-            const warnings = [];
-            const itemsStr = foods.join('+');
-            
-            // 尋找「不能同時」相關的內容（包括物理性阻塞、致癌風險等情況）
-            const patterns = [
-                /不能同時[食用服用]?\s*[，,。.]?\s*會產生[：:：]?\s*(.+?)(?:\n|$|。|；|;)/gi,
-                /不能一起[食用服用]?\s*[，,。.]?\s*會產生[：:：]?\s*(.+?)(?:\n|$|。|；|;)/gi,
-                /不可同時[食用服用]?\s*[，,。.]?\s*會產生[：:：]?\s*(.+?)(?:\n|$|。|；|;)/gi,
-                /相剋[，,。.]?\s*會產生[：:：]?\s*(.+?)(?:\n|$|。|；|;)/gi,
-                /禁忌[，,。.]?\s*會產生[：:：]?\s*(.+?)(?:\n|$|。|；|;)/gi,
-                /可能[會]?\s*形成[：:：]?\s*(.+?)(?:\n|$|。|；|;)/gi,  // 如「可能形成胃柿石」、「可能形成亞硝胺」
-                /造成[：:：]?\s*(.+?)(?:\n|$|。|；|;)/gi,  // 如「造成胃柿石」
-                /引發[：:：]?\s*(.+?)(?:\n|$|。|；|;)/gi,  // 如「引發腸胃不適」
-                /增加[：:：]?\s*(.+?)(?:\n|$|。|；|;)\s*(生成|產生|形成)/gi,  // 如「增加亞硝胺生成機會」
-                /生成[：:：]?\s*(.+?)(?:\n|$|。|；|;)/gi,  // 如「生成亞硝胺」
-                /不能同時[食用服用]?\s*[，,。.]?\s*(.+?)(?:\n|$|。|；|;)/gi,
-            ];
-            
-            for (const pattern of patterns) {
-                const matches = [...result.matchAll(pattern)];
-                matches.forEach(match => {
-                    const effect = match[1] ? match[1].trim() : match[0].trim();
-                    if (effect && !warnings.includes(effect)) {
-                        warnings.push(effect);
-                    }
-                });
-            }
-            
-            // 如果找到具體效果，返回格式化的內容
-            if (warnings.length > 0) {
-                return warnings.map(effect => `${itemsStr} 不能同時食用 會產生${effect}`).join('\n');
-            }
-            
-            // 如果沒找到具體效果，嘗試提取警告段落
-            const lines = result.split('\n');
-            const warningSections = [];
-            let inWarningSection = false;
-            let currentSection = [];
-            
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
-                const lowerLine = line.toLowerCase();
-                
-                if (lowerLine.includes('警告') || lowerLine.includes('禁忌') || 
-                    lowerLine.includes('不能同時') || lowerLine.includes('⚠️') || 
-                    lowerLine.includes('🚨') || lowerLine.includes('注意事項') ||
-                    lowerLine.includes('致癌') || lowerLine.includes('亞硝胺') ||
-                    lowerLine.includes('風險') || lowerLine.includes('潛在')) {
-                    inWarningSection = true;
-                    currentSection = [line];
-                } else if (inWarningSection) {
-                    if (line.match(/^#{1,4}\s+/)) {
-                        if (currentSection.length > 0) {
-                            warningSections.push(currentSection.join('\n'));
-                        }
-                        inWarningSection = false;
-                        currentSection = [];
-                    } else {
-                        currentSection.push(line);
-                    }
-                }
-            }
-            
-            if (currentSection.length > 0) {
-                warningSections.push(currentSection.join('\n'));
-            }
-            
-            // 從警告段落中提取效果
-            const extractedEffects = [];
-            warningSections.forEach(section => {
-                const effectMatch = section.match(/會產生[：:：]?\s*(.+?)(?:\n|$|。|；|;)/i);
-                if (effectMatch) {
-                    extractedEffects.push(effectMatch[1].trim());
-                }
-            });
-            
-            if (extractedEffects.length > 0) {
-                return extractedEffects.map(effect => `${itemsStr} 不能同時食用 會產生${effect}`).join('\n');
-            }
-            
-            // 如果還是找不到，返回基本格式
-            return `${itemsStr} 不能同時食用`;
-        }
-        
-        // 儲存禁忌提醒到 IndexedDB
-        async function saveWarning(foods, result) {
-            if (!db) {
-                await initDB();
-            }
-            
-            const warningContent = extractWarningContent(result, foods);
-            const warningData = {
-                items: foods,
-                itemsStr: foods.join('+'),
-                content: warningContent,
-                fullResult: result,
-                timestamp: new Date().toISOString()
-            };
-            
-            return new Promise((resolve, reject) => {
-                const transaction = db.transaction(['warnings'], 'readwrite');
-                const objectStore = transaction.objectStore('warnings');
-                const request = objectStore.add(warningData);
-                
-                request.onsuccess = () => {
-                    saveWarningBtn.classList.add('saved');
-                    saveWarningBtn.innerHTML = '<span>✓</span><span>已儲存</span>';
-                    setTimeout(() => {
-                        saveWarningBtn.innerHTML = '<span>⚠️</span><span>儲存禁忌提醒</span>';
-                        saveWarningBtn.classList.remove('saved');
-                    }, 2000);
-                    resolve(request.result);
-                };
-                
-                request.onerror = () => reject(request.error);
-            });
-        }
-        
-        // 檢查是否有已儲存的禁忌提醒
-        async function checkWarnings(foods) {
-            if (!db) {
-                await initDB();
-            }
-            
-            return new Promise((resolve, reject) => {
-                const transaction = db.transaction(['warnings'], 'readonly');
-                const objectStore = transaction.objectStore('warnings');
-                const request = objectStore.getAll();
-                
-                request.onsuccess = () => {
-                    const searchItems = foods.map(f => f.toLowerCase());
-                    const warnings = request.result.filter(warning => {
-                        // 檢查是否有完全匹配的物品組合
-                        const warningItems = warning.items.map(i => i.toLowerCase());
-                        if (warningItems.length !== searchItems.length) return false;
-                        
-                        // 檢查是否包含相同的物品（順序可能不同）
-                        return warningItems.every(w => searchItems.includes(w)) && 
-                               searchItems.every(s => warningItems.includes(s));
-                    });
-                    resolve(warnings);
-                };
-                
-                request.onerror = () => reject(request.error);
-            });
-        }
-        
-        // 顯示提醒
-        function showWarningAlert(warnings) {
-            if (warnings.length > 0) {
-                const warning = warnings[0];
-                const message = `⚠️ 提醒：您之前儲存的禁忌組合\n\n${warning.content || warning.itemsStr || warning.items.join('+')}\n\n請注意相關的禁忌事項！`;
-                alert(message);
-            }
-        }
-        const openApiKeyModal = document.getElementById('openApiKeyModal');
-        const closeModal = document.getElementById('closeModal');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
 
-        // 將 Markdown 格式的文字轉換為 HTML
-        function formatMarkdown(text) {
-            if (!text) return '';
-            
-            let html = text;
-            
-            // 轉換標題
-            html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
-            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-            
-            // 轉換粗體和斜體
-            html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
-            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-            
-            // 轉換表格和列表
-            const lines = html.split('\n');
-            let inList = false;
-            let inTable = false;
-            let tableHeader = '';
-            let result = [];
-            
-            for (let i = 0; i < lines.length; i++) {
-                let line = lines[i].trim();
-                
-                // 檢查表格行（以 | 開頭和結尾）
-                const tableMatch = line.match(/^\|(.+)\|$/);
-                if (tableMatch) {
-                    const cells = tableMatch[1].split('|').map(c => c.trim()).filter(c => c);
-                    
-                    // 跳過分隔行（如 |---|---|）
-                    if (cells.every(c => /^[-:]+$/.test(c))) {
-                        continue;
-                    }
-                    
-                    if (inList) {
-                        result.push('</ul>');
-                        inList = false;
-                    }
-                    
-                    // 單欄表格 = 表格標題
-                    if (cells.length === 1) {
-                        if (inTable) {
-                            result.push('</div>');
-                        }
-                        tableHeader = cells[0];
-                        result.push('<div class="info-table">');
-                        result.push('<div class="table-header">' + tableHeader + '</div>');
-                        inTable = true;
-                    } 
-                    // 兩欄表格 = 標題 + 內容
-                    else if (cells.length >= 2) {
-                        if (!inTable) {
-                            result.push('<div class="info-table">');
-                            inTable = true;
-                        }
-                        result.push('<div class="table-row">');
-                        result.push('<div class="row-label">' + cells[0] + '</div>');
-                        result.push('<div class="row-value">' + cells.slice(1).join(' | ') + '</div>');
-                        result.push('</div>');
-                    }
-                    continue;
-                }
-                
-                // 非表格行，關閉表格
-                if (inTable && line !== '') {
-                    result.push('</div>');
-                    inTable = false;
-                }
-                
-                // 檢查是否為分類標題（如「男性：」單獨一行）
-                const categoryMatch = line.match(/^([^：:|]+)[：:][\s]*$/);
-                if (categoryMatch && !line.startsWith('<')) {
-                    if (inList) {
-                        result.push('</ul>');
-                        inList = false;
-                    }
-                    result.push('<div class="category-title">' + categoryMatch[1] + '</div>');
-                    continue;
-                }
-                
-                // 檢查列表項目
-                const listMatch = line.match(/^[\s]*[-*+]\s+(.*)$/);
-                const numListMatch = line.match(/^[\s]*\d+\.\s+(.*)$/);
-                
-                if (listMatch || numListMatch) {
-                    if (!inList) {
-                        result.push('<ul>');
-                        inList = true;
-                    }
-                    let content = listMatch ? listMatch[1] : numListMatch[1];
-                    
-                    // 檢查列表項目中的「標題：內容」格式
-                    const itemTitleMatch = content.match(/^([^：:]+)[：:]\s*(.+)$/);
-                    if (itemTitleMatch) {
-                        content = '<span class="item-title">' + itemTitleMatch[1] + '</span><span class="item-content">' + itemTitleMatch[2] + '</span>';
-                    }
-                    
-                    result.push('<li>' + content + '</li>');
-                } else {
-                    if (inList) {
-                        result.push('</ul>');
-                        inList = false;
-                    }
-                    
-                    // 檢查普通行中的「標題：內容」格式
-                    const lineTitleMatch = line.match(/^([^：:<|\n]+)[：:]\s*(.+)$/);
-                    if (lineTitleMatch && !line.startsWith('<')) {
-                        line = '<p><span class="item-title">' + lineTitleMatch[1] + '</span><span class="item-content">' + lineTitleMatch[2] + '</span></p>';
-                    }
-                    
-                    result.push(line);
-                }
-            }
-            
-            if (inList) {
-                result.push('</ul>');
-            }
-            if (inTable) {
-                result.push('</div>');
-            }
-            
-            html = result.join('\n');
-            
-            // 轉換段落
-            html = html.split('\n\n').map(para => {
-                para = para.trim();
-                if (!para) return '';
-                if (para.startsWith('<h') || para.startsWith('<ul') || para.startsWith('<ol') || 
-                    para.startsWith('<li') || para.startsWith('<blockquote') || 
-                    para.startsWith('<div') || para.startsWith('<p>') || para.startsWith('</div>')) {
-                    return para;
-                }
-                if (para.includes('<ul>') || para.includes('</ul>') || para.includes('<div') || para.includes('</div>')) {
-                    return para;
-                }
-                return '<p>' + para + '</p>';
-            }).join('\n');
-            
-            // 清理
-            html = html.replace(/<p><\/p>/g, '');
-            html = html.replace(/\n{3,}/g, '\n\n');
-            
-            return html;
-        }
-
-        // 保存暫存
-        function saveCache(foods, result) {
-            const cacheData = {
-                foods: foods,
-                result: result,
-                timestamp: new Date().toISOString()
-            };
-            localStorage.setItem('efficacy_search_cache', JSON.stringify(cacheData));
-        }
-
-        // 初始化：自動恢復最後的搜尋結果
-        function initCache() {
-            const cached = localStorage.getItem('efficacy_search_cache');
-            if (cached) {
-                try {
-                    const data = JSON.parse(cached);
-                    displayResult(data.foods, data.result, false);
-                } catch (e) {
-                    console.error('載入暫存失敗:', e);
-                }
-            }
-        }
-
-        // 初始化
-        initCache();
-        
-        // 初始化 IndexedDB
-        initDB().catch(err => {
-            console.error('IndexedDB 初始化失敗:', err);
-        });
-
-        // 從本地儲存載入 API Key
-        const savedApiKey = localStorage.getItem('gemini_api_key');
-        if (savedApiKey) {
-            apiKeyInput.value = savedApiKey;
-        }
-
-        // 打開模態視窗
-        function openModal() {
+        // ===== API Key Modal =====
+        document.getElementById('openApiKeyModal').addEventListener('click', () => {
+            apiKeyInput.value = localStorage.getItem('gemini_api_key') || '';
             apiKeyModal.classList.add('show');
-            if (savedApiKey) {
-                apiKeyInput.value = savedApiKey;
-            }
-            apiKeyInput.focus();
-        }
+        });
 
-        // 關閉模態視窗
-        function closeModalFunc() {
+        document.getElementById('cancelBtn').addEventListener('click', () => {
             apiKeyModal.classList.remove('show');
-        }
+        });
 
-        // 儲存 API Key
-        function saveApiKey() {
-            const apiKey = apiKeyInput.value.trim();
-            if (apiKey) {
-                localStorage.setItem('gemini_api_key', apiKey);
-                closeModalFunc();
-            } else {
-                alert('請輸入有效的 API Key');
+        document.getElementById('saveApiKeyBtn').addEventListener('click', () => {
+            const key = apiKeyInput.value.trim();
+            if (key) {
+                localStorage.setItem('gemini_api_key', key);
+                apiKeyModal.classList.remove('show');
             }
-        }
+        });
 
-        // 事件監聽
-        openApiKeyModal.addEventListener('click', openModal);
-        closeModal.addEventListener('click', closeModalFunc);
-        cancelBtn.addEventListener('click', closeModalFunc);
-        saveApiKeyBtn.addEventListener('click', saveApiKey);
-
-        // 點擊模態背景關閉
         apiKeyModal.addEventListener('click', (e) => {
-            if (e.target === apiKeyModal) {
-                closeModalFunc();
-            }
+            if (e.target === apiKeyModal) apiKeyModal.classList.remove('show');
         });
 
-        // ESC 鍵關閉模態
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && apiKeyModal.classList.contains('show')) {
-                closeModalFunc();
-            }
+        // ===== 圖片上傳 =====
+        imageUploadArea.addEventListener('click', () => imageInput.click());
+        
+        imageInput.addEventListener('change', (e) => handleImageUpload(e.target.files));
+
+        imageUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            imageUploadArea.style.borderColor = 'var(--primary)';
         });
 
-        // 圖片上傳功能
+        imageUploadArea.addEventListener('dragleave', () => {
+            imageUploadArea.style.borderColor = '#cbd5e1';
+        });
+
+        imageUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            imageUploadArea.style.borderColor = '#cbd5e1';
+            handleImageUpload(e.dataTransfer.files);
+        });
+
         function handleImageUpload(files) {
             Array.from(files).forEach(file => {
                 if (file.type.startsWith('image/')) {
                     const reader = new FileReader();
                     reader.onload = (e) => {
                         uploadedImages.push({
-                            file: file,
                             dataUrl: e.target.result,
-                            base64: e.target.result.split(',')[1]
+                            base64: e.target.result.split(',')[1],
+                            mimeType: file.type
                         });
                         updateImagePreview();
                     };
@@ -1857,521 +591,357 @@
         }
 
         function updateImagePreview() {
-            imagePreviewContainer.innerHTML = uploadedImages.map((img, index) => `
+            imagePreviewContainer.innerHTML = uploadedImages.map((img, i) => `
                 <div class="image-preview-item">
-                    <img src="${img.dataUrl}" alt="預覽 ${index + 1}">
-                    <button class="remove-btn" onclick="removeImage(${index})" title="移除">×</button>
+                    <img src="${img.dataUrl}" alt="預覽">
+                    <button class="remove-btn" onclick="removeImage(${i})">×</button>
                 </div>
             `).join('');
         }
 
-        window.removeImage = function(index) {
+        function removeImage(index) {
             uploadedImages.splice(index, 1);
             updateImagePreview();
-        };
-
-        // 將圖片轉換為 Gemini API 格式
-        function convertImageToGeminiFormat(dataUrl) {
-            const base64 = dataUrl.split(',')[1];
-            const mimeType = dataUrl.match(/data:([^;]+);/)[1];
-            return {
-                inlineData: {
-                    data: base64,
-                    mimeType: mimeType
-                }
-            };
         }
 
-        // 圖片上傳事件
-        imageInput.addEventListener('change', (e) => {
-            handleImageUpload(e.target.files);
-        });
-
-        // 拖放功能
-        imageUploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            imageUploadSection.classList.add('drag-over');
-        });
-
-        imageUploadArea.addEventListener('dragleave', () => {
-            imageUploadSection.classList.remove('drag-over');
-        });
-
-        imageUploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            imageUploadSection.classList.remove('drag-over');
-            handleImageUpload(e.dataTransfer.files);
-        });
-
-        // 搜尋按鈕點擊事件
+        // ===== 搜尋功能 =====
         searchBtn.addEventListener('click', handleSearch);
-
-        // Enter 鍵搜尋（Ctrl/Cmd + Enter）
-        foodInput.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                handleSearch();
-            }
-        });
 
         async function handleSearch() {
             const input = foodInput.value.trim();
-            const apiKey = localStorage.getItem('gemini_api_key') || '';
-            
+            const apiKey = localStorage.getItem('gemini_api_key');
+
             if (!apiKey) {
                 showError('請先設定 Gemini API Key');
-                openModal();
+                apiKeyModal.classList.add('show');
                 return;
             }
-            
-            // 檢查是否有輸入文字或圖片
+
             if (!input && uploadedImages.length === 0) {
                 showError('請輸入項目名稱或上傳圖片');
                 return;
             }
 
-            let foods = [];
-            if (input) {
-                foods = input
-                    .split(/[,\n，、\s]+/)
-                    .map(f => f.trim())
-                    .filter(f => f.length > 0);
-            }
+            // 解析輸入的項目
+            const foods = input ? input.split(/[,\n，、\s]+/).map(f => f.trim()).filter(f => f) : [];
 
             setLoading(true);
             hideError();
             hideResult();
 
-            // 檢查是否有已儲存的禁忌提醒
-            if (foods.length > 1) {
-                checkWarnings(foods).then(warnings => {
-                    if (warnings.length > 0) {
-                        setTimeout(() => showWarningAlert(warnings), 500);
-                    }
-                }).catch(err => {
-                    console.error('檢查提醒失敗:', err);
-                });
-            }
-
             try {
-                let itemList = foods.length > 0 ? foods.join('、') : '';
-                let hasImages = uploadedImages.length > 0;
-                
                 // 構建提示詞
-                let prompt = '';
-                
-                if (hasImages && itemList) {
-                    // 有圖片和文字
-                    prompt = `請仔細查看上傳的圖片，**準確辨識**圖片中的食物、藥物、保健食品或任何可食用的物品。
+                const prompt = buildPrompt(foods, uploadedImages.length > 0);
 
-**重要要求：**
-1. **只辨識你確定能看到的物品**，不要猜測或編造
-2. 如果圖片模糊、不清楚或無法辨識，請明確說明「無法辨識」或「圖片不清楚」
-3. 如果圖片中沒有食物、藥物等相關物品，請明確說明
-4. 不要編造不存在的物品名稱或功效
-
-${itemList ? `同時，請分析以下文字輸入的項目：${itemList}` : ''}
-
-請先準確辨識圖片中的物品（如果能夠辨識），然後提供詳細的功效分析。`;
-                } else if (hasImages) {
-                    // 只有圖片
-                    prompt = `請仔細查看上傳的圖片，**準確辨識**圖片中的食物、藥物、保健食品、營養補充劑、中藥、草藥或任何可食用/服用的東西。
-
-**重要要求：**
-1. **只辨識你確定能看到的物品**，不要猜測或編造
-2. 如果圖片模糊、不清楚或無法辨識，請明確說明「無法辨識」或「圖片不清楚」
-3. 如果圖片中沒有食物、藥物等相關物品，請明確說明「圖片中未發現相關物品」
-4. 不要編造不存在的物品名稱或功效
-5. 如果只能看到部分物品，請明確說明「只能看到...」或「部分物品無法辨識」
-
-請先準確辨識圖片中出現的所有物品（如果能夠辨識），然後針對每個**確定辨識出**的物品提供詳細分析。`;
-                } else {
-                    // 只有文字
-                    prompt = `請詳細分析以下項目的功效、作用和相關資訊：
-
-項目：${itemList}`;
-                }
-                
-                prompt += `
-
-**準確性要求（非常重要）：**
-- **只辨識你確定能看到的物品**，不要猜測、編造或推測
-- 如果圖片模糊、不清楚或無法辨識，請明確說明「無法辨識」或「圖片不清楚」
-- 如果圖片中沒有食物、藥物等相關物品，請明確說明「圖片中未發現相關物品」
-- 如果不確定物品名稱，請說明「無法確定」或「疑似為...（但無法確認）」
-- 如果只能看到部分物品，請明確說明「只能看到...」或「部分物品無法辨識」
-- **絕對不要編造不存在的物品名稱、功效或資訊**
-- 所有資訊必須基於實際辨識結果，不要添加不確定的內容
-
-注意：這些項目可能包含食物、藥物、保健食品、營養補充劑、中藥、草藥或任何可食用/服用的東西。請根據項目類型提供適當的分析。
-
-請以繁體中文回答，使用以下格式：
-
-## 📋 各項目詳細分析
-
-針對每個項目，請使用以下結構化格式：
-
-### [項目名稱]
-
-**如果是食物，請使用此格式：**
-
-| 主要營養成分 |
-| 維生素 | 列出含有的維生素 |
-| 礦物質 | 列出含有的礦物質 |
-| 纖維 | 說明纖維含量 |
-| 其他成分 | 列出其他重要成分 |
-
-| 健康益處 |
-| 功效1 | 說明 |
-| 功效2 | 說明 |
-
-| 食用建議 |
-| 建議方式 | 說明 |
-| 建議份量 | 說明 |
-
-**如果是藥物，請使用此格式：**
-
-| 基本資訊 |
-| 藥物類型 | 說明 |
-| 作用機制 | 說明 |
-
-| 適應症 |
-| 主要用途 | 列出主要適應症 |
-
-| 副作用 |
-| 常見 | 列出常見副作用 |
-| 嚴重 | 列出嚴重副作用（如有） |
-
-**如果是保健食品，請使用此格式：**
-
-| 基本資訊 |
-| 主要成分 | 列出成分 |
-| 功效 | 說明功效 |
-
-| 使用建議 |
-| 建議用量 | 說明 |
-| 適用人群 | 說明 |
-
-## 🔗 交互作用分析
-
-${foods.length > 1 ? `分析這${foods.length}個項目同時使用時：
-
-### ✅ 正面效果
-（如有協同作用、增強效果等）
-
-### ⚠️ 負面效果
-（包括但不限於：
-- 化學反應（如產生毒素、降低營養吸收）
-- 物理性阻塞（如單寧酸與蛋白質結合形成凝塊、胃柿石等）
-- 致癌物質生成（如亞硝酸鹽與胺類形成亞硝胺等）
-- 藥理相互作用（如影響藥物吸收、代謝）
-- 其他不良反應）
-
-**重要說明**：
-- 如果是物理性阻塞（如胃柿石），請明確說明「並非化學中毒，而是物理性阻塞」，並詳細解釋機理（如「單寧酸與蛋白質結合」）。
-- 如果涉及致癌風險（如亞硝胺），請明確說明：
-  * 是否為絕對禁忌或僅為潛在風險
-  * 實際影響程度（如「少量食用並不會立即中毒」）
-  * 關鍵因素（如「食品添加物是否符合規範」）
-  * 是否有抑制方法（如「搭配富含維他命C/E的食物可抑制生成」）
-
-### 🔄 同作用
-（如有相同或相似的功效）
-
-### △ 注意事項與禁忌
-（詳細說明為什麼會產生不適、機理、風險程度，以及哪些人群需要特別注意）
-
-### 💡 建議的食用方式
-（包括：
-- 分開食用的時間間隔（如「間隔4小時以上」）
-- 適量攝取建議
-- 搭配抗氧化物（如大蒜、洋蔥、青椒、綠茶等富含維他命C、E的食物）
-- 特殊處理方式（如「先水煮再烤，減少亞硝酸鹽轉化」）
-- 減少特定食品攝取頻率的建議）
-
-### 🚨 警告
-如果有危險的組合，請明確警告，並說明：
-- 是否為化學中毒、物理性阻塞或致癌風險
-- 風險程度（絕對禁忌 vs 潛在風險）
-- 哪些其他食物也可能有類似情況
-- 具體的預防措施和建議
-- 是否需要搭配抗氧化物來降低風險` : '（僅輸入單一項目，無交互作用分析）'}
-
-## 💡 使用建議
-
-| 建議 |
-| 項目 | 說明 |
-
----
-
-**免責聲明：** 以上資訊僅供參考，不構成醫療建議。使用任何藥物或保健食品前，請諮詢專業醫療人員。`;
-
+                // API 請求
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 
-                // 構建 parts 陣列（文字 + 圖片）
                 const parts = [{ text: prompt }];
-                
-                // 添加圖片
-                if (uploadedImages.length > 0) {
-                    uploadedImages.forEach(img => {
-                        parts.push(convertImageToGeminiFormat(img.dataUrl));
+                uploadedImages.forEach(img => {
+                    parts.push({
+                        inlineData: {
+                            data: img.base64,
+                            mimeType: img.mimeType
+                        }
                     });
-                }
-                
+                });
+
                 const response = await fetch(apiUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{
-                            parts: parts
-                        }]
+                        contents: [{ parts }],
+                        generationConfig: {
+                            temperature: 0.7,
+                            maxOutputTokens: 8192
+                        }
                     })
                 });
 
                 if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.error?.message || `API 請求失敗: ${response.status}`);
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.error?.message || `API 錯誤: ${response.status}`);
                 }
 
                 const data = await response.json();
-                
-                let text = '';
-                if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                    text = data.candidates[0].content.parts
-                        .map(part => part.text)
-                        .join('');
-                } else {
-                    throw new Error('無法取得 API 回應內容');
-                }
+                const text = data.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '';
 
-                // 如果有圖片，將辨識出的項目加入 foods 陣列
-                let finalFoods = [...foods];
-                if (uploadedImages.length > 0 && text) {
-                    // 嘗試從結果中提取辨識出的項目名稱
-                    const identifiedItems = text.match(/###\s+(.+?)(?:\n|$)/g);
-                    if (identifiedItems) {
-                        identifiedItems.forEach(item => {
-                            const itemName = item.replace(/###\s+/, '').trim();
-                            if (itemName && !finalFoods.includes(itemName)) {
-                                finalFoods.push(itemName);
-                            }
-                        });
-                    }
-                }
-                
-                displayResult(finalFoods.length > 0 ? finalFoods : foods, text);
+                if (!text) throw new Error('無法取得回應內容');
+
+                // 顯示結果
+                displayResult(foods, text);
+                saveCache(foods, text);
 
             } catch (error) {
                 console.error('搜尋錯誤:', error);
-                let errorMsg = '搜尋時發生錯誤，請稍後再試';
-                
-                if (error.message.includes('API_KEY') || error.message.includes('API key')) {
-                    errorMsg = 'API Key 無效，請檢查並重新輸入';
-                } else if (error.message.includes('QUOTA') || error.message.includes('quota')) {
-                    errorMsg = 'API 配額已用完，請稍後再試';
-                } else if (error.message.includes('403') || error.message.includes('Forbidden')) {
-                    errorMsg = 'API Key 無效或沒有權限，請檢查 API Key';
-                } else if (error.message.includes('401') || error.message.includes('Unauthorized')) {
-                    errorMsg = 'API Key 驗證失敗，請檢查 API Key';
-                } else if (error.message.includes('429') || error.message.includes('rate limit')) {
-                    errorMsg = '請求過於頻繁，請稍後再試';
-                } else {
-                    errorMsg = error.message || errorMsg;
-                }
-                
-                showError(errorMsg);
+                showError(error.message || '搜尋時發生錯誤');
             } finally {
                 setLoading(false);
             }
         }
 
-        // 分離交互作用分析和各物品內容
-        function parseResult(result, foods) {
-            // 尋找交互作用分析的位置（匹配多種可能的格式）
-            const interactionPatterns = [
-                /##\s*[🔗🔗]?\s*交互作用分析[\s\S]*?(?=##\s*[💡💡]?\s*使用建議|##\s*###|$)/i,
-                /##\s*交互作用分析[\s\S]*?(?=##\s*|###\s+|$)/i,
-                /交互作用分析[\s\S]*?(?=##\s*[💡💡]?\s*使用建議|##\s*###|$)/i
-            ];
+        function buildPrompt(foods, hasImages) {
+            const itemList = foods.join('、');
             
-            let interactionContent = '';
-            let itemsContent = result;
+            let prompt = '';
             
-            for (const pattern of interactionPatterns) {
-                const match = result.match(pattern);
-                if (match) {
-                    interactionContent = match[0].trim();
-                    // 從結果中移除交互作用分析部分
-                    itemsContent = result.replace(match[0], '').trim();
-                    break;
-                }
+            if (hasImages) {
+                prompt = `請辨識圖片中的食物、藥物或保健食品，並分析其功效。
+${itemList ? `同時也分析這些項目：${itemList}` : ''}
+
+辨識要求：
+- 只辨識確定能看到的物品
+- 無法辨識請說明「無法辨識」
+- 不要編造不存在的物品
+`;
+            } else {
+                prompt = `請分析以下項目的功效：${itemList}
+`;
             }
-            
-            // 解析各物品內容
-            const items = [];
-            
-            if (foods.length <= 1) {
-                return {
-                    interaction: interactionContent,
-                    items: [{
-                        name: foods.length > 0 ? foods[0] : '結果',
-                        content: itemsContent
-                    }]
-                };
+
+            prompt += `
+請以繁體中文回答，使用以下格式：
+
+${foods.map(food => `
+## ${food}
+
+### 基本資訊
+- **類型：** (食物/藥物/保健食品)
+- **主要成分：** (列出主要成分)
+
+### 功效與益處
+- (功效1)
+- (功效2)
+- (功效3)
+
+### 注意事項
+- **適用人群：** (說明)
+- **禁忌人群：** (說明)
+- **建議用量：** (說明)
+`).join('\n')}
+
+${foods.length > 1 ? `
+## 🔗 交互作用分析
+
+### ✅ 正面效果
+(列出這些項目一起使用的正面效果)
+
+### ⚠️ 負面效果與風險
+(列出可能的負面交互作用、是否為「絕對禁忌」或「潛在風險」、機理說明)
+
+### 💡 食用建議
+(是否需要分開食用、間隔時間、搭配建議)
+` : ''}
+
+## 📝 總結
+(提供3-5條具體使用建議)
+`;
+            return prompt;
+        }
+
+        // ===== 顯示結果 =====
+        function displayResult(foods, text) {
+            // 顯示食物標籤
+            foodTags.innerHTML = foods.map(f => `<span class="food-tag">${f}</span>`).join('');
+
+            // 解析結果
+            const parsed = parseResult(text, foods);
+
+            // 如果有多個項目，顯示切換按鈕
+            if (foods.length > 1 && parsed.items.length > 0) {
+                itemTabs.style.display = 'flex';
+                itemTabs.innerHTML = foods.map((food, i) => 
+                    `<button class="item-tab ${i === 0 ? 'active' : ''}" data-index="${i}">${food}</button>`
+                ).join('');
+
+                // 顯示第一個項目的內容
+                resultContent.innerHTML = parsed.items.map((item, i) => 
+                    `<div class="item-content" data-index="${i}" style="${i !== 0 ? 'display:none;' : ''}">${formatMarkdown(item.content)}</div>`
+                ).join('');
+
+                // 切換事件
+                itemTabs.querySelectorAll('.item-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const index = parseInt(tab.dataset.index);
+                        itemTabs.querySelectorAll('.item-tab').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        resultContent.querySelectorAll('.item-content').forEach(c => c.style.display = 'none');
+                        const target = resultContent.querySelector(`.item-content[data-index="${index}"]`);
+                        if (target) target.style.display = 'block';
+                    });
+                });
+            } else {
+                itemTabs.style.display = 'none';
+                resultContent.innerHTML = formatMarkdown(text);
             }
-            
-            // 多個物品，根據物品名稱分割結果
+
+            // 顯示交互作用分析
+            if (foods.length > 1 && parsed.interaction) {
+                interactionSection.style.display = 'block';
+                interactionSection.innerHTML = formatMarkdown(parsed.interaction);
+            } else {
+                interactionSection.style.display = 'none';
+            }
+
+            // 檢查是否有警告內容
+            if (hasWarningContent(text) && foods.length > 1) {
+                saveWarningBtn.style.display = 'block';
+                saveWarningBtn.onclick = () => saveWarning(foods, text);
+            } else {
+                saveWarningBtn.style.display = 'none';
+            }
+
+            resultSection.style.display = 'block';
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function parseResult(text, foods) {
+            const result = { items: [], interaction: '' };
+
+            // 提取交互作用分析
+            const interactionMatch = text.match(/##\s*🔗?\s*交互作用分析[\s\S]*?(?=##\s*📝|$)/i);
+            if (interactionMatch) {
+                result.interaction = interactionMatch[0];
+            }
+
+            // 為每個食物提取內容
             for (let i = 0; i < foods.length; i++) {
                 const food = foods[i];
                 const nextFood = foods[i + 1];
                 
-                // 尋找該物品在結果中的位置
-                const patterns = [
-                    new RegExp(`###\\s+${food.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i'),
-                    new RegExp(`##\\s+.*?${food.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i'),
-                    new RegExp(`\\[${food.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\]`, 'i'),
-                    new RegExp(food.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i')
-                ];
+                // 尋找該食物的區塊
+                const startPattern = new RegExp(`##\\s*${escapeRegex(food)}[\\s\\S]*?(?=##\\s*${nextFood ? escapeRegex(nextFood) : '🔗|📝'}|$)`, 'i');
+                const match = text.match(startPattern);
                 
-                let startIndex = -1;
-                for (const pattern of patterns) {
-                    const match = itemsContent.match(pattern);
-                    if (match) {
-                        startIndex = match.index;
-                        break;
-                    }
-                }
-                
-                // 如果找不到，嘗試找下一個物品的位置
-                let endIndex = itemsContent.length;
-                if (nextFood) {
-                    for (const pattern of patterns) {
-                        const nextPattern = new RegExp(pattern.source.replace(food.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), nextFood.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), 'i');
-                        const match = itemsContent.match(nextPattern);
-                        if (match) {
-                            endIndex = match.index;
-                            break;
-                        }
-                    }
-                }
-                
-                if (startIndex !== -1) {
-                    items.push({
+                if (match) {
+                    result.items.push({
                         name: food,
-                        content: itemsContent.substring(startIndex, endIndex).trim()
-                    });
-                } else {
-                    // 如果找不到該物品的內容，嘗試平均分割
-                    const avgLength = Math.floor(itemsContent.length / foods.length);
-                    const start = i * avgLength;
-                    const end = nextFood ? (i + 1) * avgLength : itemsContent.length;
-                    items.push({
-                        name: food,
-                        content: itemsContent.substring(start, end).trim()
+                        content: match[0]
                     });
                 }
             }
-            
-            return {
-                interaction: interactionContent,
-                items: items.length > 0 ? items : [{
-                    name: foods[0] || '結果',
-                    content: itemsContent
-                }]
-            };
+
+            // 如果沒有匹配到任何項目，嘗試用簡單分割
+            if (result.items.length === 0 && foods.length > 0) {
+                const cleanText = text.replace(/##\s*🔗[\s\S]*$/i, '').replace(/##\s*📝[\s\S]*$/i, '');
+                result.items.push({
+                    name: foods[0],
+                    content: cleanText
+                });
+            }
+
+            return result;
         }
 
-        function displayResult(foods, result, autoSave = true) {
-            searchedFoods.innerHTML = foods
-                .map(food => `<span class="food-tag">${food}</span>`)
-                .join('');
+        function escapeRegex(str) {
+            return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
 
-            const itemTabs = document.getElementById('itemTabs');
+        // ===== Markdown 格式化 =====
+        function formatMarkdown(text) {
+            if (!text) return '';
             
-            // 檢測是否有禁忌內容
-            const hasWarning = hasWarningContent(result);
-            if (hasWarning && foods.length > 1) {
-                resultActions.style.display = 'flex';
-                saveWarningBtn.onclick = () => saveWarning(foods, result);
-            } else {
-                resultActions.style.display = 'none';
-            }
+            let html = text;
             
-            // 解析結果，分離交互作用分析和各物品內容
-            const parsed = parseResult(result, foods);
+            // 標題
+            html = html.replace(/^#### (.*)$/gim, '<h4>$1</h4>');
+            html = html.replace(/^### (.*)$/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*)$/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*)$/gim, '<h1>$1</h1>');
             
-            // 只有多個輸入物品時才顯示切換按鈕
-            if (foods.length > 1) {
-                // 顯示切換按鈕（使用輸入的物品名稱）
-                itemTabs.style.display = 'flex';
-                itemTabs.innerHTML = foods.map((food, index) => 
-                    `<button class="item-tab ${index === 0 ? 'active' : ''}" data-index="${index}">${food}</button>`
-                ).join('');
+            // 粗體
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // 列表
+            const lines = html.split('\n');
+            let inList = false;
+            const result = [];
+            
+            for (const line of lines) {
+                const trimmed = line.trim();
+                const listMatch = trimmed.match(/^[-*]\s+(.*)$/);
+                const numMatch = trimmed.match(/^\d+\.\s+(.*)$/);
                 
-                // 創建內容容器（只顯示各物品的內容，不包含交互作用分析）
-                resultContent.innerHTML = parsed.items.map((item, index) => 
-                    `<div class="item-content-wrapper ${index === 0 ? 'active' : ''}" data-index="${index}">${formatMarkdown(item.content)}</div>`
-                ).join('');
-                
-                // 添加切換事件
-                itemTabs.querySelectorAll('.item-tab').forEach(tab => {
-                    tab.addEventListener('click', () => {
-                        const index = parseInt(tab.dataset.index);
-                        
-                        // 更新按鈕狀態
-                        itemTabs.querySelectorAll('.item-tab').forEach(t => t.classList.remove('active'));
-                        tab.classList.add('active');
-                        
-                        // 更新內容顯示
-                        resultContent.querySelectorAll('.item-content-wrapper').forEach(w => w.classList.remove('active'));
-                        const targetContent = resultContent.querySelector(`.item-content-wrapper[data-index="${index}"]`);
-                        if (targetContent) {
-                            targetContent.classList.add('active');
-                        }
-                    });
-                });
-            } else {
-                // 單一項目，直接顯示（不包含交互作用分析）
-                itemTabs.style.display = 'none';
-                const formattedResult = formatMarkdown(parsed.items[0].content);
-                resultContent.innerHTML = formattedResult;
+                if (listMatch || numMatch) {
+                    if (!inList) {
+                        result.push('<ul>');
+                        inList = true;
+                    }
+                    result.push(`<li>${listMatch ? listMatch[1] : numMatch[1]}</li>`);
+                } else {
+                    if (inList) {
+                        result.push('</ul>');
+                        inList = false;
+                    }
+                    if (trimmed) result.push(trimmed);
+                }
             }
+            if (inList) result.push('</ul>');
             
-            // 顯示交互作用分析（如果有多個物品且有交互作用內容）- 顯示在按鈕和內容下方
-            if (foods.length > 1 && parsed.interaction) {
-                interactionContent.style.display = 'block';
-                interactionContent.innerHTML = formatMarkdown(parsed.interaction);
-            } else {
-                interactionContent.style.display = 'none';
-            }
+            html = result.join('\n');
             
-            resultSection.style.display = 'block';
+            // 段落
+            html = html.split('\n\n').map(p => {
+                p = p.trim();
+                if (!p || p.startsWith('<')) return p;
+                return `<p>${p}</p>`;
+            }).join('\n');
+            
+            return html;
+        }
 
-            if (autoSave) {
-                saveCache(foods, result);
+        // ===== 工具函數 =====
+        function hasWarningContent(text) {
+            const keywords = ['不能同時', '禁忌', '警告', '危險', '⚠️', '🚨', '絕對禁忌', '負面效果'];
+            return keywords.some(k => text.includes(k));
+        }
+
+        async function saveWarning(foods, text) {
+            if (!db) await initDB();
+            
+            const tx = db.transaction(['warnings'], 'readwrite');
+            const store = tx.objectStore('warnings');
+            
+            await store.add({
+                items: foods,
+                content: `${foods.join('+')} - 注意交互作用`,
+                result: text,
+                timestamp: new Date().toISOString()
+            });
+
+            saveWarningBtn.textContent = '✓ 已儲存';
+            saveWarningBtn.style.background = 'var(--success)';
+            setTimeout(() => {
+                saveWarningBtn.textContent = '⚠️ 儲存禁忌提醒';
+                saveWarningBtn.style.background = '';
+            }, 2000);
+        }
+
+        function saveCache(foods, text) {
+            localStorage.setItem('efficacy_cache', JSON.stringify({ foods, text }));
+        }
+
+        function loadCache() {
+            const cache = localStorage.getItem('efficacy_cache');
+            if (cache) {
+                try {
+                    const { foods, text } = JSON.parse(cache);
+                    if (foods && text) {
+                        displayResult(foods, text);
+                    }
+                } catch (e) {}
             }
-
-            resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function setLoading(loading) {
             searchBtn.disabled = loading;
-            const btnText = searchBtn.querySelector('.btn-text');
-            const btnLoading = searchBtn.querySelector('.btn-loading');
-            
-            if (loading) {
-                btnText.style.display = 'none';
-                btnLoading.style.display = 'inline-flex';
-            } else {
-                btnText.style.display = 'inline';
-                btnLoading.style.display = 'none';
-            }
+            searchBtn.querySelector('.btn-text').style.display = loading ? 'none' : 'inline';
+            searchBtn.querySelector('.btn-loading').style.display = loading ? 'inline' : 'none';
         }
 
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.style.display = 'flex';
+        function showError(msg) {
+            errorMessage.textContent = msg;
+            errorMessage.style.display = 'block';
             resultSection.style.display = 'none';
         }
 
@@ -2382,6 +952,10 @@ ${foods.length > 1 ? `分析這${foods.length}個項目同時使用時：
         function hideResult() {
             resultSection.style.display = 'none';
         }
+
+        // ===== 初始化 =====
+        initDB().catch(console.error);
+        loadCache();
     </script>
 </body>
 </html>
