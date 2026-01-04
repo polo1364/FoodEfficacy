@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物功效搜尋系統</title>
+    <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.umd.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        main {
+            padding: 40px 30px;
+        }
+
+        .api-key-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .api-key-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        header {
+            position: relative;
+        }
+
+        /* 模態視窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #667eea;
+            margin: 0;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .modal-body label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .modal-body input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .modal-body input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .modal-body .hint {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .modal-body .hint a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .modal-body .hint a:hover {
+            text-decoration: underline;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .search-section {
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        #foodInput {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        #foodInput:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-btn {
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
+        }
+
+        .search-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-section {
+            margin-top: 30px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .result-header h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            color: #555;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .action-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .action-btn.save-btn {
+            background: #4caf50;
+            color: white;
+        }
+
+        .action-btn.save-btn:hover {
+            background: #45a049;
+        }
+
+        .cache-section {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .cache-section.show {
+            display: block;
+        }
+
+        .cache-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .cache-header h3 {
+            color: #1976d2;
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        .cache-content {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .cache-foods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .cache-food-tag {
+            background: #2196f3;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+        }
+
+        .cache-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .searched-foods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .food-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .result-content {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 1.05em;
+        }
+
+        .result-content h3 {
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .result-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .result-content ul {
+            margin-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .result-content li {
+            margin-bottom: 8px;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #c33;
+            margin-top: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            main {
+                padding: 30px 20px;
+            }
+
+            .result-content {
+                padding: 20px;
+                font-size: 1em;
+            }
+
+            .api-key-btn {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+        }
+
+        /* 載入動畫 */
+        .btn-loading {
+            display: inline-block;
+        }
+
+        .btn-loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% {
+                content: '.';
+            }
+            40% {
+                content: '..';
+            }
+            60%, 100% {
+                content: '...';
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="api-key-btn" id="openApiKeyModal">⚙️ API 設定</button>
+            <h1>🍎 食物功效搜尋系統</h1>
+            <p class="subtitle">使用 Gemini 2.5 Flash 智能分析食物功效</p>
+        </header>
+
+        <main>
+            <div class="cache-section" id="cacheSection">
+                <div class="cache-header">
+                    <h3>💾 暫存結果</h3>
+                    <button class="action-btn" id="clearCacheBtn">清除暫存</button>
+                </div>
+                <div class="cache-content">
+                    <div class="cache-foods" id="cacheFoods"></div>
+                    <div id="cacheResult" class="result-content" style="margin: 0; padding: 15px; font-size: 0.95em;"></div>
+                </div>
+                <div class="cache-actions">
+                    <button class="btn btn-primary" id="loadCacheBtn">載入此結果</button>
+                </div>
+            </div>
+
+            <div class="search-section">
+                <div class="input-group">
+                    <label for="foodInput">輸入食物名稱（可輸入多種，用逗號或換行分隔）</label>
+                    <textarea 
+                        id="foodInput" 
+                        placeholder="例如：蘋果、香蕉、菠菜&#10;或：番茄、雞蛋、牛奶"
+                        rows="3"
+                    ></textarea>
+                </div>
+                <button id="searchBtn" class="search-btn">
+                    <span class="btn-text">🔍 搜尋功效</span>
+                    <span class="btn-loading" style="display: none;">搜尋中...</span>
+                </button>
+            </div>
+
+            <div id="resultSection" class="result-section" style="display: none;">
+                <div class="result-header">
+                    <h2>
+                        搜尋結果
+                        <div class="result-actions">
+                            <button class="action-btn save-btn" id="saveCacheBtn">💾 暫存</button>
+                        </div>
+                    </h2>
+                    <div id="searchedFoods" class="searched-foods"></div>
+                </div>
+                <div id="resultContent" class="result-content"></div>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </main>
+
+        <footer>
+            <p>Powered by Google Gemini 2.5 Flash</p>
+        </footer>
+    </div>
+
+    <!-- API Key 模態視窗 -->
+    <div id="apiKeyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔑 設定 API Key</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <label for="apiKeyInput">Gemini API Key</label>
+                <input 
+                    type="password" 
+                    id="apiKeyInput" 
+                    placeholder="請輸入您的 Gemini API Key"
+                >
+                <div class="hint">
+                    💡 提示：API Key 會保存在瀏覽器本地，不會上傳到任何伺服器。<br>
+                    <a href="https://makersuite.google.com/app/apikey" target="_blank">點此申請 API Key</a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBtn">取消</button>
+                <button class="btn btn-primary" id="saveApiKeyBtn">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const foodInput = document.getElementById('foodInput');
+        const apiKeyInput = document.getElementById('apiKeyInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const resultSection = document.getElementById('resultSection');
+        const resultContent = document.getElementById('resultContent');
+        const searchedFoods = document.getElementById('searchedFoods');
+        const errorMessage = document.getElementById('errorMessage');
+        const apiKeyModal = document.getElementById('apiKeyModal');
+        const openApiKeyModal = document.getElementById('openApiKeyModal');
+        const closeModal = document.getElementById('closeModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
+        const saveCacheBtn = document.getElementById('saveCacheBtn');
+        const cacheSection = document.getElementById('cacheSection');
+        const cacheFoods = document.getElementById('cacheFoods');
+        const cacheResult = document.getElementById('cacheResult');
+        const loadCacheBtn = document.getElementById('loadCacheBtn');
+        const clearCacheBtn = document.getElementById('clearCacheBtn');
+
+        // 載入暫存
+        function loadCache() {
+            const cached = localStorage.getItem('food_efficacy_cache');
+            if (cached) {
+                try {
+                    const data = JSON.parse(cached);
+                    cacheFoods.innerHTML = data.foods
+                        .map(food => `<span class="cache-food-tag">${food}</span>`)
+                        .join('');
+                    cacheResult.textContent = data.result;
+                    cacheSection.classList.add('show');
+                } catch (e) {
+                    console.error('載入暫存失敗:', e);
+                }
+            }
+        }
+
+        // 保存暫存
+        function saveCache(foods, result) {
+            const cacheData = {
+                foods: foods,
+                result: result,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('food_efficacy_cache', JSON.stringify(cacheData));
+            loadCache();
+        }
+
+        // 清除暫存
+        function clearCache() {
+            localStorage.removeItem('food_efficacy_cache');
+            cacheSection.classList.remove('show');
+        }
+
+        // 載入暫存到主結果區
+        function loadCacheToResult() {
+            const cached = localStorage.getItem('food_efficacy_cache');
+            if (cached) {
+                try {
+                    const data = JSON.parse(cached);
+                    displayResult(data.foods, data.result);
+                    // 更新輸入框
+                    foodInput.value = data.foods.join('、');
+                    // 滾動到結果
+                    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } catch (e) {
+                    console.error('載入暫存失敗:', e);
+                }
+            }
+        }
+
+        // 初始化：載入暫存
+        loadCache();
+
+        // 事件監聽
+        saveCacheBtn.addEventListener('click', () => {
+            // 保存當前顯示的結果
+            const currentFoods = Array.from(searchedFoods.querySelectorAll('.food-tag'))
+                .map(tag => tag.textContent);
+            if (currentFoods.length > 0 && resultContent.textContent) {
+                saveCache(currentFoods, resultContent.textContent);
+                // 顯示提示
+                const originalText = saveCacheBtn.textContent;
+                saveCacheBtn.textContent = '✓ 已暫存';
+                saveCacheBtn.style.background = '#4caf50';
+                setTimeout(() => {
+                    saveCacheBtn.textContent = originalText;
+                    saveCacheBtn.style.background = '';
+                }, 2000);
+            }
+        });
+
+        loadCacheBtn.addEventListener('click', loadCacheToResult);
+        clearCacheBtn.addEventListener('click', clearCache);
+
+        // 從本地儲存載入 API Key
+        const savedApiKey = localStorage.getItem('gemini_api_key');
+        if (savedApiKey) {
+            apiKeyInput.value = savedApiKey;
+        }
+
+        // 打開模態視窗
+        function openModal() {
+            apiKeyModal.classList.add('show');
+            // 如果有保存的 API Key，顯示在輸入框中
+            if (savedApiKey) {
+                apiKeyInput.value = savedApiKey;
+            }
+            apiKeyInput.focus();
+        }
+
+        // 關閉模態視窗
+        function closeModalFunc() {
+            apiKeyModal.classList.remove('show');
+        }
+
+        // 儲存 API Key
+        function saveApiKey() {
+            const apiKey = apiKeyInput.value.trim();
+            if (apiKey) {
+                localStorage.setItem('gemini_api_key', apiKey);
+                closeModalFunc();
+            } else {
+                alert('請輸入有效的 API Key');
+            }
+        }
+
+        // 事件監聽
+        openApiKeyModal.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModalFunc);
+        cancelBtn.addEventListener('click', closeModalFunc);
+        saveApiKeyBtn.addEventListener('click', saveApiKey);
+
+        // 點擊模態背景關閉
+        apiKeyModal.addEventListener('click', (e) => {
+            if (e.target === apiKeyModal) {
+                closeModalFunc();
+            }
+        });
+
+        // ESC 鍵關閉模態
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && apiKeyModal.classList.contains('show')) {
+                closeModalFunc();
+            }
+        });
+
+        // 搜尋按鈕點擊事件
+        searchBtn.addEventListener('click', handleSearch);
+
+        // Enter 鍵搜尋（Ctrl/Cmd + Enter）
+        foodInput.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
+        async function handleSearch() {
+            const input = foodInput.value.trim();
+            // 從 localStorage 獲取 API Key
+            const apiKey = localStorage.getItem('gemini_api_key') || '';
+            
+            if (!apiKey) {
+                showError('請先設定 Gemini API Key');
+                openModal();
+                return;
+            }
+            
+            if (!input) {
+                showError('請輸入至少一種食物名稱');
+                return;
+            }
+
+            // 解析輸入的食物（支援逗號、換行、空格分隔）
+            const foods = input
+                .split(/[,\n，、\s]+/)
+                .map(f => f.trim())
+                .filter(f => f.length > 0);
+
+            if (foods.length === 0) {
+                showError('請輸入有效的食物名稱');
+                return;
+            }
+
+            // 顯示載入狀態
+            setLoading(true);
+            hideError();
+            hideResult();
+
+            try {
+                // 初始化 Gemini API
+                const genAI = new google.generativeai.GenerativeAI(apiKey);
+                const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+
+                const foodList = foods.join('、');
+
+                // 構建提示詞
+                const prompt = `請詳細分析以下食物的功效和營養價值：
+
+食物：${foodList}
+
+請以繁體中文回答，並包含以下內容：
+
+1. **各食物的功效**：
+   - 列出每種食物的主要功效和營養成分
+   - 說明對人體健康的益處
+
+2. **一起食用的效果**：
+   - 如果輸入多種食物，請分析它們一起食用的優點
+   - 說明可能的協同效應或營養互補
+   - 列出一起食用時需要注意的缺點或禁忌
+   - 如果有相剋或不適合一起食用的情況，請明確說明
+
+3. **建議**：
+   - 提供食用建議和注意事項
+
+請用結構化的方式回答，使用清晰的標題和分段。`;
+
+                // 調用 Gemini API
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                const text = response.text();
+
+                // 顯示結果
+                displayResult(foods, text);
+
+            } catch (error) {
+                console.error('搜尋錯誤:', error);
+                let errorMsg = '搜尋時發生錯誤，請稍後再試';
+                
+                if (error.message.includes('API_KEY')) {
+                    errorMsg = 'API Key 無效，請檢查並重新輸入';
+                } else if (error.message.includes('QUOTA')) {
+                    errorMsg = 'API 配額已用完，請稍後再試';
+                } else {
+                    errorMsg = error.message || errorMsg;
+                }
+                
+                showError(errorMsg);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        function displayResult(foods, result) {
+            // 顯示搜尋的食物標籤
+            searchedFoods.innerHTML = foods
+                .map(food => `<span class="food-tag">${food}</span>`)
+                .join('');
+
+            // 格式化並顯示結果
+            resultContent.textContent = result;
+            resultSection.style.display = 'block';
+
+            // 滾動到結果區域
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function setLoading(loading) {
+            searchBtn.disabled = loading;
+            const btnText = searchBtn.querySelector('.btn-text');
+            const btnLoading = searchBtn.querySelector('.btn-loading');
+            
+            if (loading) {
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline';
+            } else {
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+            }
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            resultSection.style.display = 'none';
+        }
+
+        function hideError() {
+            errorMessage.style.display = 'none';
+        }
+
+        function hideResult() {
+            resultSection.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
