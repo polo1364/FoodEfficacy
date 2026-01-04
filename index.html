@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>食物功效搜尋系統</title>
-    <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.21.0/dist/index.umd.js" 
+            onerror="console.error('無法載入 Google Generative AI SDK')"></script>
     <style>
         * {
             margin: 0;
@@ -666,8 +667,35 @@
             }
         }
 
-        // 初始化：載入暫存
-        loadCache();
+        // 檢查 SDK 是否已載入
+        function checkSDKLoaded() {
+            return typeof google !== 'undefined' && google.generativeai;
+        }
+
+        // 等待 SDK 載入
+        function waitForSDK(callback, maxAttempts = 50) {
+            let attempts = 0;
+            const checkInterval = setInterval(() => {
+                attempts++;
+                if (checkSDKLoaded()) {
+                    clearInterval(checkInterval);
+                    callback();
+                } else if (attempts >= maxAttempts) {
+                    clearInterval(checkInterval);
+                    console.error('SDK 載入超時');
+                    showError('無法載入 Google Generative AI SDK，請檢查網路連線或重新整理頁面');
+                }
+            }, 100);
+        }
+
+        // 初始化：等待 SDK 載入後再載入暫存
+        if (checkSDKLoaded()) {
+            loadCache();
+        } else {
+            waitForSDK(() => {
+                loadCache();
+            });
+        }
 
         // 事件監聽
         saveCacheBtn.addEventListener('click', () => {
@@ -785,6 +813,24 @@
             hideResult();
 
             try {
+                // 檢查 SDK 是否已載入
+                if (typeof google === 'undefined' || !google.generativeai) {
+                    // 嘗試等待 SDK 載入
+                    await new Promise((resolve, reject) => {
+                        let attempts = 0;
+                        const checkInterval = setInterval(() => {
+                            attempts++;
+                            if (typeof google !== 'undefined' && google.generativeai) {
+                                clearInterval(checkInterval);
+                                resolve();
+                            } else if (attempts >= 50) {
+                                clearInterval(checkInterval);
+                                reject(new Error('Google Generative AI SDK 載入失敗，請重新整理頁面'));
+                            }
+                        }, 100);
+                    });
+                }
+
                 // 初始化 Gemini API
                 const genAI = new google.generativeai.GenerativeAI(apiKey);
                 const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
